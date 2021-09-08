@@ -3,6 +3,7 @@ const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
+const ClientError = require('./client-error');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -21,6 +22,9 @@ app.use(staticMiddleware);
 
 app.post('/api/plans', (req, res, next) => {
   const { planName, date } = req.body;
+  if (!planName || !date) {
+    throw new ClientError(400, 'planName and date are required fields');
+  }
   const insertPlan = `
     insert into "plans" ("planName", "date", "userId")
     values ($1, $2, 1)
@@ -37,6 +41,9 @@ app.post('/api/plans', (req, res, next) => {
 
 app.post('/api/activities', (req, res, next) => {
   const { details, activityName } = req.body;
+  if (!activityName || !details) {
+    throw new ClientError(400, 'activityName and details are required fields');
+  }
   const insertActivity = `
     insert into "activities" ("activityName", "details", "planId")
     values ($1, $2, 1)
