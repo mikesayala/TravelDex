@@ -2,10 +2,54 @@ require('dotenv/config');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const pg = require('pg');
+
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 const app = express();
 
+const jsonMiddleware = express.json();
+
+app.use(jsonMiddleware);
+
 app.use(staticMiddleware);
+
+app.post('/api/plans', (req, res, next) => {
+  const { planName, date } = req.body;
+  const insertPlan = `
+    insert into "plans" ("planName", "date", "userId")
+    values ($1, $2, 1)
+    returning "planName", "planId"
+  `;
+  const params = [planName, date];
+  db.query(insertPlan, params)
+    .then(result => {
+      const [plan] = result.rows;
+      res.status(201).json(plan);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/activities', (req, res, next) => {
+  const { details, activityName } = req.body;
+  const insertActivity = `
+    insert into "activities" ("activityName", "details", "planId")
+    values ($1, $2, 1)
+    returning "activityName", "details", "activityId"
+  `;
+  const params = [activityName, details];
+  db.query(insertActivity, params)
+    .then(result => {
+      const [activity] = result.rows;
+      res.status(201).json(activity);
+    })
+    .catch(err => next(err));
+});
 
 app.use(errorMiddleware);
 
