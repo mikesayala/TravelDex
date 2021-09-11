@@ -11,6 +11,7 @@ CREATE TABLE "public"."plans" (
 	"userId" integer NOT NULL,
 	"date" TEXT NOT NULL,
 	"planName" TEXT NOT NULL,
+  "pictureUrl" TEXT,
 	CONSTRAINT "plans_pk" PRIMARY KEY ("planId")
 ) WITH (
   OIDS=FALSE
