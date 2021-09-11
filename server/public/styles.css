@@ -1,0 +1,33 @@
+.fas {
+  font-size: 35px;
+  margin-left: 15px;
+  margin-top: 10px;
+  width: 25%;
+}
+
+.textarea {
+  border: 2px solid #212121;
+}
+
+.height-25 {
+  height: 25vh;
+}
+
+.height-30 {
+  height: 30vh;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #7749f8;
+  border: none;
+  width: 80px;
+  margin-top: 10px;
+}
+
+.container {
+  width: 100%;
+}
