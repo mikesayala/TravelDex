@@ -34,6 +34,19 @@ app.get('/api/plans', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/activities/', (req, res, next) => {
+  const getActivities = `
+    select *
+      from "activities"
+      order by "planId"
+  `;
+  db.query(getActivities)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/plans', (req, res, next) => {
   const { planName, date, pictureUrl } = req.body;
   if (!planName || !date) {
