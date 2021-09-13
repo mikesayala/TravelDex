@@ -31,3 +31,90 @@
 .container {
   width: 100%;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h2 {
+  margin-left: 20px;
+}
+
+ul {
+  margin-left: 20px;
+  padding: 0;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+li:hover {
+  background-color: gray;
+  opacity: 0.4;
+}
+
+.background-img {
+  height: 100vh;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.hidden {
+  left: -55% !important;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.background {
+  width: 100%;
+  left: 205px;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.app-drawer {
+  background-color: white;
+  width: 25%;
+  height: 100vh;
+  position: fixed;
+  left: -17%;
+  top: 0;
+  transform: translateX(235px);
+  transition: 1s;
+  z-index: 3;
+}
+
+.background-is-active {
+  width: 100%;
+  left: 1px;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+/* .background-img-is-active {
+  height: 100vh;
+  z-index: 0;
+} */

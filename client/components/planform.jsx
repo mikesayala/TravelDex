@@ -55,7 +55,7 @@ export default class PlanForm extends React.Component {
 
         <>
           <div className="row align-center d-flex justify-content-center">
-            <div className="col-5 d-flex justify-content-center flex-col-rev height-25">
+            <div className="col-3 d-flex justify-content-center flex-col-rev height-25">
               <img src="images/computer.png" alt="comp"/>
             </div>
           </div>

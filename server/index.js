@@ -25,7 +25,7 @@ app.get('/api/plans', (req, res, next) => {
   const getPlans = `
     select *
       from "plans"
-      order by "planId"
+      order by "planId" desc
     `;
   db.query(getPlans)
     .then(result => {
@@ -34,15 +34,31 @@ app.get('/api/plans', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/activities/', (req, res, next) => {
-  const getActivities = `
+app.get('/api/activities', (req, res, next) => {
+  const act = `
     select *
       from "activities"
       order by "planId"
   `;
-  db.query(getActivities)
+  db.query(act)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/activities/:planId', (req, res, next) => {
+  const id = req.params.planId;
+  const params = [id];
+  const getActivities = `
+    select "activityName",
+           "details"
+      from "activities"
+      where "planId" = $1
+  `;
+  db.query(getActivities, params)
+    .then(result => {
+      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });
