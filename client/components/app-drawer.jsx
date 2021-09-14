@@ -36,7 +36,7 @@ class AppDrawer extends React.Component {
     return (
      <div>
         <div onClick={this.handleToggleOff} className={`${this.state.isOpen ? 'background-is-active fixed' : 'background fixed'}`}></div>
-        <i onClick={this.handleClick} className="fas fa-bars"></i>
+        <i onClick={this.handleClick} className="fas fa-bars position-absolute"></i>
           <div className={`app-drawer ${this.state.isOpen ? '' : 'hidden'}`}>
             <h2 className="justify-center">Plans</h2>
             <ul className="justify-center">

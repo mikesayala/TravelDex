@@ -16,7 +16,11 @@ export default class ActivityForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ planId: this.props.planId.planId.planId });
+    if (window.location.hash === '') {
+      this.setState({ planId: this.props.planId.planId.planId });
+    } else {
+      this.setState({ planId: this.props.planId });
+    }
   }
 
   handleActivityName(event) {

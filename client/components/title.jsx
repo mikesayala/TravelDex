@@ -5,7 +5,7 @@ export default class Title extends React.Component {
     return (
       <div className="container">
         <div className="row d-flex justify-content-center">
-          <div className="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
+          <div className="col-5 col-sm-5 col-md-7 col-lg-5 col-xl-4">
               <img className="w-100 mt-3" src="images/traveldex.png" alt="logo"/>
           </div>
         </div>

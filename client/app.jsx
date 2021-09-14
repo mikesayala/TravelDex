@@ -1,4 +1,5 @@
 import React from 'react';
+import ActivityForm from './components/activityform';
 import parseRoute from './lib/parse-route';
 import Home from './pages/home';
 import Result from './pages/result';
@@ -29,6 +30,10 @@ export default class App extends React.Component {
     }
     if (path === 'result') {
       return <Result />;
+    }
+    if (path === 'activityForm') {
+      const params = window.location.hash.substring(21);
+      return <ActivityForm planId={params} />;
     }
   }
 

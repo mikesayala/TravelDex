@@ -29,7 +29,7 @@ app.get('/api/plans', (req, res, next) => {
     `;
   db.query(getPlans)
     .then(result => {
-      res.json(result.rows);
+      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });
@@ -42,7 +42,8 @@ app.get('/api/activities', (req, res, next) => {
   `;
   db.query(act)
     .then(result => {
-      res.json(result.rows);
+      res.status(200).json(result.rows);
+
     })
     .catch(err => next(err));
 });
@@ -52,13 +53,14 @@ app.get('/api/activities/:planId', (req, res, next) => {
   const params = [id];
   const getActivities = `
     select "activityName",
-           "details"
+           "details",
+           "activityId"
       from "activities"
       where "planId" = $1
   `;
   db.query(getActivities, params)
     .then(result => {
-      res.json(result.rows[0]);
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });
