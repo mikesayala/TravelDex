@@ -43,7 +43,6 @@ export default class PlanForm extends React.Component {
       .then(response => response.json())
       .then(responseBodyData => {
         this.props.setPlanId({ planId: responseBodyData });
-        // this.props.setFormView('activity-form');
         this.setState({ planId: responseBodyData.planId });
         window.location.hash = `activityForm?planId=${this.state.planId}`;
       })

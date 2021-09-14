@@ -7,7 +7,7 @@ export default class Result extends React.Component {
     super(props);
     this.state = {
       view: 'results',
-      currentPlanId: parseInt(window.location.hash.substring(15)),
+      currentPlanId: parseInt(this.props.planId),
       currentPlan: {}
     };
   }

@@ -14,9 +14,7 @@ export default class Accordion extends React.Component {
 
   handleClick(event) {
     const eventTargetId = parseInt(event.target.getAttribute('id'));
-    if (this.state.activityId === null) {
-      this.setState({ activityId: eventTargetId });
-    } else if (this.state.activityId === eventTargetId) {
+    if (this.state.activityId === eventTargetId) {
       this.setState({ activityId: null });
     } else if (this.state.activityId !== eventTargetId) {
       this.setState({ activityId: eventTargetId });

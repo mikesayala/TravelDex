@@ -19,7 +19,7 @@ export default class ActivityForm extends React.Component {
 
   componentDidMount() {
     if (window.location.hash === '') {
-      this.setState({ planId: this.props.planId.planId.planId });
+      this.setState({ planId: this.props.planId });
     } else {
       this.setState({ planId: this.props.planId });
     }

@@ -18,22 +18,19 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-    // const token = window.localStorage.getItem('react-context-jwt');
-    // const user = token ? decodeToken(token) : null;
-    // this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
+    const planId = this.state.route.params.get('planId');
     const { path } = this.state.route;
     if (path === '') {
       return <Home />;
     }
     if (path === 'result') {
-      return <Result />;
+      return <Result planId={planId} />;
     }
     if (path === 'activityForm') {
-      const params = window.location.hash.substring(21);
-      return <ActivityForm planId={params} />;
+      return <ActivityForm planId={planId} />;
     }
   }
 
