@@ -41,13 +41,13 @@ export default class Accordion extends React.Component {
       }
       return (
                <div key={activity.activityId}>
-                  <div onClick={this.handleClick} className="col-12 border-bottom lightblue">
-                    <h4 className="margin-0" id={activity.activityId}>
+                  <div onClick={this.handleClick} className="col-11 lightblue rounded-top border-top border-start border-end border-dark">
+                    <h4 className="margin-0 p-2" id={activity.activityId}>
                       {activity.activityName}
                     </h4>
                   </div>
-                  <div className={`overflow-scroll ${actId}`}>
-                    <p className="margin-0">
+                  <div className={`overflow-scroll col-11 p-0 rounded-bottom border border-dark ${actId}`}>
+                    <p className="m-2 p-0">
                       {activity.details}
                     </p>
                   </div>
