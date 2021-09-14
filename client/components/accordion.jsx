@@ -35,19 +35,19 @@ export default class Accordion extends React.Component {
     let actId;
     const activitiesMap = this.state.activities.map(activity => {
       if (activity.activityId === this.state.activityId) {
-        actId = 'height-5-rem';
+        actId = 'height-7-rem';
       } else {
         actId = 'height-0';
       }
       return (
                <div key={activity.activityId}>
-                  <div onClick={this.handleClick} className="col-11 lightblue rounded-top border-top border-start border-end border-dark">
-                    <h4 className="margin-0 p-2" id={activity.activityId}>
+                  <div onClick={this.handleClick} className="col-12 lightblue pointer rounded-top border-top border-start border-end border-dark">
+                    <h4 className="margin-0 p-2 actName-font" id={activity.activityId}>
                       {activity.activityName}
                     </h4>
                   </div>
-                  <div className={`flow-auto col-11 rounded-bottom border border-dark ${actId}`}>
-                    <p className="m-2 padding-0">
+                  <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
+                    <p className="m-2 actDeets-font">
                       {activity.details}
                     </p>
                   </div>

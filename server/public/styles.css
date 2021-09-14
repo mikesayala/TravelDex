@@ -13,14 +13,6 @@
   height: 25vh;
 }
 
-.height-30 {
-  height: 30vh;
-}
-
-.height-80 {
-  height: 80vh;
-}
-
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:active,
@@ -61,6 +53,7 @@ li {
 }
 
 a {
+  color: black;
   text-decoration: none;
 }
 
@@ -144,7 +137,7 @@ li:hover {
   margin: 0;
 }
 
-.height-5-rem {
+.height-7-rem {
   height: 7rem;
   transition: height 1s;
 }
@@ -162,6 +155,20 @@ li:hover {
   padding: 0;
 }
 
-.margin-3 {
-  margin-right: 3.3em;
+.app-drawer-background {
+  background-color: #bec3f9 !important;
+}
+
+.actName-font {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.actDeets-font {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+.pointer {
+  cursor: pointer;
 }

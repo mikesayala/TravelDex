@@ -25,9 +25,6 @@ export default class Home extends React.Component {
   render() {
     return (
     <>
-      {/* <div className="col-2 col-xs-2 col-md-4 col-lg-6 position-absolute start-0">
-        <i className="fas fa-bars"></i>
-      </div> */}
         <AppDrawer plans={this.state.planId} />
       <div className="container">
         <Title />
