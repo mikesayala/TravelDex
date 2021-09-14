@@ -46,8 +46,8 @@ export default class Accordion extends React.Component {
                       {activity.activityName}
                     </h4>
                   </div>
-                  <div className={`overflow-scroll col-11 p-0 rounded-bottom border border-dark ${actId}`}>
-                    <p className="m-2 p-0">
+                  <div className={`flow-auto col-11 rounded-bottom border border-dark ${actId}`}>
+                    <p className="m-2 padding-0">
                       {activity.details}
                     </p>
                   </div>

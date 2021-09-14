@@ -37,7 +37,7 @@ export default class Result extends React.Component {
                   {this.state.currentPlan.planName}
                 </h1>
                 <a href={`#activityForm?planId=${this.state.currentPlanId}`}>
-                  <button>click me</button>
+                  <button className="mb-2">click me</button>
                 </a>
                 <Accordion plan={this.state.currentPlanId} />
              </div>
