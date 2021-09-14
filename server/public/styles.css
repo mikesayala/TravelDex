@@ -13,10 +13,6 @@
   height: 25vh;
 }
 
-.height-30 {
-  height: 30vh;
-}
-
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:active,
@@ -30,4 +26,149 @@
 
 .container {
   width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h2 {
+  margin-left: 20px;
+}
+
+ul {
+  margin-left: 20px;
+  padding: 0;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+li:hover {
+  background-color: gray;
+  opacity: 0.4;
+}
+
+.background-img {
+  height: 100vh;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.lightblue {
+  background-color: #a1cae2;
+}
+
+.lightgray {
+  background-color: lightgray;
+}
+
+.background {
+  width: 100%;
+  left: 205px;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.app-drawer {
+  background-color: white;
+  width: 250px;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: width 1s;
+  z-index: 3;
+  overflow: scroll;
+}
+
+.background-is-active {
+  width: 100%;
+  left: 1px;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.hidden {
+  width: 0;
+  overflow: scroll;
+}
+
+.accordionCollapse {
+  width: 0;
+  overflow: scroll;
+}
+
+.plan {
+  font-family: 'kite one', sans-serif;
+}
+
+.pictureUrl {
+  width: 500px;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.height-7-rem {
+  height: 7rem;
+  transition: height 1s;
+}
+
+.height-0 {
+  height: 0;
+  transition: height 1s;
+}
+
+.flow-auto {
+  overflow: auto;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.app-drawer-background {
+  background-color: #bec3f9 !important;
+}
+
+.actName-font {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.actDeets-font {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+.pointer {
+  cursor: pointer;
 }

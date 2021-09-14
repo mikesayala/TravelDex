@@ -25,9 +25,40 @@ app.get('/api/plans', (req, res, next) => {
   const getPlans = `
     select *
       from "plans"
-      order by "planId"
+      order by "planId" desc
     `;
   db.query(getPlans)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/activities', (req, res, next) => {
+  const act = `
+    select *
+      from "activities"
+      order by "planId"
+  `;
+  db.query(act)
+    .then(result => {
+      res.status(200).json(result.rows);
+
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/activities/:planId', (req, res, next) => {
+  const id = req.params.planId;
+  const params = [id];
+  const getActivities = `
+    select "activityName",
+           "details",
+           "activityId"
+      from "activities"
+      where "planId" = $1
+  `;
+  db.query(getActivities, params)
     .then(result => {
       res.json(result.rows);
     })

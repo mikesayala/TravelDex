@@ -4,25 +4,58 @@ export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isOpen: false,
+      activityId: null,
+      planId: parseInt(this.props.plan),
+      activities: []
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    const eventTargetId = parseInt(event.target.getAttribute('id'));
+    if (this.state.activityId === eventTargetId) {
+      this.setState({ activityId: null });
+    } else if (this.state.activityId !== eventTargetId) {
+      this.setState({ activityId: eventTargetId });
+    }
+  }
+
+  componentDidMount() {
+    fetch(`api/activities/${this.state.planId}`)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ activities: result });
+      });
   }
 
   render() {
+    let actId;
+    const activitiesMap = this.state.activities.map(activity => {
+      if (activity.activityId === this.state.activityId) {
+        actId = 'height-7-rem';
+      } else {
+        actId = 'height-0';
+      }
+      return (
+               <div key={activity.activityId}>
+                  <div onClick={this.handleClick} className="col-12 lightblue pointer rounded-top border-top border-start border-end border-dark">
+                    <h4 className="margin-0 p-2 actName-font" id={activity.activityId}>
+                      {activity.activityName}
+                    </h4>
+                  </div>
+                  <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
+                    <p className="m-2 actDeets-font">
+                      {activity.details}
+                    </p>
+                  </div>
+               </div>
+      );
+    });
     return (
-    <div className="accordion" id="accordionExample">
-  <div className="accordion-item m-3 col-11 rounded position-absolute top-50 start-50 translate-middle">
-    <h2 className="accordion-header" id="headingOne">
-      <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div className="accordion-body">
-        <strong>This is the first items accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. Its also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      <div>
+          {activitiesMap}
       </div>
-    </div>
-  </div>
-</div>
     );
   }
 }

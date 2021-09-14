@@ -43,7 +43,8 @@ export default class PlanForm extends React.Component {
       .then(response => response.json())
       .then(responseBodyData => {
         this.props.setPlanId({ planId: responseBodyData });
-        this.props.setFormView('activity-form');
+        this.setState({ planId: responseBodyData.planId });
+        window.location.hash = `activityForm?planId=${this.state.planId}`;
       })
       .catch(err => {
         console.error(err);
@@ -55,7 +56,7 @@ export default class PlanForm extends React.Component {
 
         <>
           <div className="row align-center d-flex justify-content-center">
-            <div className="col-5 d-flex justify-content-center flex-col-rev height-25">
+            <div className="col-3 d-flex justify-content-center flex-col-rev height-25">
               <img src="images/computer.png" alt="comp"/>
             </div>
           </div>
@@ -86,7 +87,9 @@ export default class PlanForm extends React.Component {
             </div>
             <div className="row d-flex position-relative top-100 justify-content-center">
               <div className="col-3 d-flex justify-content-center">
-              <button type="submit" className="btn btn-primary">Start</button>
+                <a href={`#activityForm?planId=${this.state.currentPlanId}`}>
+                   <button type="submit" className="btn btn-primary">Start</button>
+                </a>
               </div>
             </div>
           </div>
