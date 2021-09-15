@@ -25,7 +25,7 @@ export default class Result extends React.Component {
       <>
         <AppDrawer />
         <div className="container">
-           <div className="d-flex  row">
+           <div className="d-flex row">
              <div className="col-12 col-sm-6 p-0 d-flex h-25 justify-content-center">
                <img src={this.state.currentPlan.pictureUrl} className=" pictureUrl h-25 p-0 m-0" alt=""/>
              </div>

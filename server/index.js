@@ -103,6 +103,33 @@ app.post('/api/activities', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.patch('/api/activities/:activityId', (req, res, next) => {
+  const { activityName, details } = req.body;
+  const activityId = parseInt(req.params.activityId);
+  if (!activityName || !details) {
+    throw new ClientError(400, 'activityName, and details are required fields');
+  }
+  const updateActivity = `
+      update "activities"
+         set "activityName" = $1,
+             "details" = $2
+       where "activityId" = $3
+       returning *
+  `;
+  const params = [activityName, details, activityId];
+  db.query(updateActivity, params)
+    .then(result => {
+      const [updatedActivity] = result.rows;
+      if (!updatedActivity) {
+        res.status(404).json({
+          error: `cannot find activity with activityId ${activityId}`
+        });
+      }
+      res.json(updatedActivity);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
