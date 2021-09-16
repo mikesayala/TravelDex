@@ -57,6 +57,7 @@ app.get('/api/plans/:planId/activities', (req, res, next) => {
            "activityId"
       from "activities"
       where "planId" = $1
+      order by "activityId" asc
   `;
   db.query(getActivities, params)
     .then(result => {
@@ -71,7 +72,8 @@ app.get('/api/activities/:activityId', (req, res, next) => {
   const actId = `
     select "activityName",
            "details",
-           "activityId"
+           "activityId",
+           "planId"
       from "activities"
      where "activityId" = $1
   `;
