@@ -22,7 +22,7 @@ export default class Accordion extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`api/activities/${this.state.planId}`)
+    fetch(`api/plans/${this.state.planId}/activities`)
       .then(response => response.json())
       .then(result => {
         this.setState({ activities: result });
@@ -39,9 +39,12 @@ export default class Accordion extends React.Component {
       }
       return (
                <div key={activity.activityId}>
-                  <div onClick={this.handleClick} className="col-12 lightblue pointer rounded-top border-top border-start border-end border-dark">
-                    <h4 className="margin-0 p-2 actName-font" id={activity.activityId}>
+                  <div onClick={this.handleClick} className="col-12 height-3 lightblue pointer rounded-top border-top border-start border-end border-dark">
+                    <h4 className="margin-0 p-2 actName-font overflow-hidden" id={activity.activityId}>
                       {activity.activityName}
+                      <a href={`#activityForm?activityId=${activity.activityId}`}>
+                        <i className=" fas fa-pencil-alt"></i>
+                      </a>
                     </h4>
                   </div>
                   <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>

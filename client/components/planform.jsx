@@ -53,7 +53,6 @@ export default class PlanForm extends React.Component {
 
   render() {
     return (
-
         <>
           <div className="row align-center d-flex justify-content-center">
             <div className="col-3 d-flex justify-content-center flex-col-rev height-25">
@@ -75,7 +74,7 @@ export default class PlanForm extends React.Component {
                 <div className="col-12">
                   <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Image</label>
-                    <input onChange={this.handlePicture} type="text" className="col-12 form-control-lg" id="exampleFormControlInput1" placeholder=""/>
+                    <input required onChange={this.handlePicture} type="text" className="col-12 form-control-lg" id="exampleFormControlInput1" placeholder=""/>
                   </div>
                 </div>
               </div>

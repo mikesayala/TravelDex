@@ -1,6 +1,5 @@
 require('dotenv/config');
 const express = require('express');
-// const uploadsMiddleware = require('./uploads-middleware');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
@@ -48,7 +47,7 @@ app.get('/api/activities', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/activities/:planId', (req, res, next) => {
+app.get('/api/plans/:planId/activities', (req, res, next) => {
   const id = req.params.planId;
   const params = [id];
   const getActivities = `
@@ -57,10 +56,29 @@ app.get('/api/activities/:planId', (req, res, next) => {
            "activityId"
       from "activities"
       where "planId" = $1
+      order by "activityId" asc
   `;
   db.query(getActivities, params)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/activities/:activityId', (req, res, next) => {
+  const idAct = req.params.activityId;
+  const params = [idAct];
+  const actId = `
+    select "activityName",
+           "details",
+           "activityId",
+           "planId"
+      from "activities"
+     where "activityId" = $1
+  `;
+  db.query(actId, params)
+    .then(result => {
+      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });
@@ -99,6 +117,33 @@ app.post('/api/activities', (req, res, next) => {
     .then(result => {
       const [activity] = result.rows;
       res.status(201).json(activity);
+    })
+    .catch(err => next(err));
+});
+
+app.patch('/api/activities/:activityId', (req, res, next) => {
+  const { activityName, details } = req.body;
+  const activityId = parseInt(req.params.activityId);
+  if (!activityName || !details) {
+    throw new ClientError(400, 'activityName, and details are required fields');
+  }
+  const updateActivity = `
+      update "activities"
+         set "activityName" = $1,
+             "details" = $2
+       where "activityId" = $3
+       returning *
+  `;
+  const params = [activityName, details, activityId];
+  db.query(updateActivity, params)
+    .then(result => {
+      const [updatedActivity] = result.rows;
+      if (!updatedActivity) {
+        res.status(404).json({
+          error: `cannot find activity with activityId ${activityId}`
+        });
+      }
+      res.json(updatedActivity);
     })
     .catch(err => next(err));
 });

@@ -172,3 +172,16 @@ li:hover {
 .pointer {
   cursor: pointer;
 }
+
+.edit {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  position: relative;
+  bottom: 2rem;
+  font-size: 25px;
+}
+
+.height-3 {
+  height: 4rem;
+}

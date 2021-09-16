@@ -9,7 +9,8 @@ export default class ActivityForm extends React.Component {
       activityName: '',
       location: '',
       details: '',
-      planId: ''
+      planId: '',
+      activityId: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
@@ -18,10 +19,21 @@ export default class ActivityForm extends React.Component {
   }
 
   componentDidMount() {
-    if (window.location.hash === '') {
+    if (this.props.planId) {
       this.setState({ planId: this.props.planId });
-    } else {
-      this.setState({ planId: this.props.planId });
+    }
+    if (this.props.activityId) {
+      fetch(`/api/activities/${this.props.activityId}`)
+        .then(res => res.json())
+        .then(activityId => {
+          if (!activityId.error) {
+            this.setState({
+              activityName: activityId.activityName,
+              details: activityId.details,
+              planId: activityId.planId
+            });
+          }
+        });
     }
   }
 
@@ -40,24 +52,41 @@ export default class ActivityForm extends React.Component {
   handleSubmit(event) {
     const { activityName, details, planId } = this.state;
     event.preventDefault();
-    fetch('/api/activities/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        activityName,
-        details,
-        planId
+    if (this.props.planId) {
+      fetch('/api/activities/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          activityName,
+          details,
+          planId
+        })
       })
-    })
-      .then(response => {
-        response.json();
-        event.target.reset();
+        .then(response => {
+          window.location.hash = `#result?planId=${this.state.planId}`;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      const { activityName, details } = this.state;
+      fetch(`/api/activities/${this.props.activityId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          activityName,
+          details
+        })
       })
-      .catch(err => {
-        console.error(err);
-      });
+        .then(response => {
+          window.location.hash = `#result?planId=${this.state.planId}`;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   }
 
   render() {
@@ -72,7 +101,7 @@ export default class ActivityForm extends React.Component {
               <div className="col-10 col-sm-9">
                 <div className="mb-3">
                   <label htmlFor="activity-name" className="form-label">Activity Name</label>
-                  <input onChange={this.handleActivityName} required type="text" className="col-12 form-control-lg" id="activity-name" placeholder=""/>
+                  <input onChange={this.handleActivityName} value={ this.state.activityName } required type="text" className="col-12 form-control-lg" id="activity-name" placeholder=""/>
               </div>
               </div>
             </div>
@@ -88,14 +117,16 @@ export default class ActivityForm extends React.Component {
               <div className="col-10 col-sm-9">
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">Details</label>
-                  <textarea onChange={this.handleDetails} className="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea onChange={this.handleDetails} value={ this.state.details } className="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
               </div>
             </div>
             <div className="row d-flex justify-content-center">
               <div className="col-10 col-sm-9">
                 <div className="mb-3 d-flex justify-content-end">
-                  <button type="submit" className="btn btn-primary">Submit</button>
+                  <button className="btn btn-primary">
+                    submit
+                  </button>
                 </div>
               </div>
             </div>
