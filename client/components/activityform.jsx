@@ -10,9 +10,7 @@ export default class ActivityForm extends React.Component {
       location: '',
       details: '',
       planId: '',
-      activityId: null,
-      editForm: null,
-      isEditing: false
+      activityId: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
@@ -22,8 +20,7 @@ export default class ActivityForm extends React.Component {
 
   componentDidMount() {
     if (this.props.planId) {
-      this.setState({ planId: this.props.planId }, () => {
-      });
+      this.setState({ planId: this.props.planId });
     }
     if (this.props.activityId) {
       fetch(`/api/activities/${this.props.activityId}`)
@@ -55,8 +52,7 @@ export default class ActivityForm extends React.Component {
   handleSubmit(event) {
     const { activityName, details, planId } = this.state;
     event.preventDefault();
-    const requirement = window.location.hash.slice(14, 20);
-    if (requirement === 'planId') {
+    if (this.props.planId) {
       fetch('/api/activities/', {
         method: 'POST',
         headers: {
@@ -69,8 +65,6 @@ export default class ActivityForm extends React.Component {
         })
       })
         .then(response => {
-          response.json();
-          event.target.reset();
           window.location.hash = `#result?planId=${this.state.planId}`;
         })
         .catch(err => {
@@ -87,8 +81,6 @@ export default class ActivityForm extends React.Component {
         })
       })
         .then(response => {
-          response.json();
-          event.target.reset();
           window.location.hash = `#result?planId=${this.state.planId}`;
         })
         .catch(err => {

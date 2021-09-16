@@ -40,7 +40,7 @@ export default class Accordion extends React.Component {
       return (
                <div key={activity.activityId}>
                   <div onClick={this.handleClick} className="col-12 height-3 lightblue pointer rounded-top border-top border-start border-end border-dark">
-                    <h4 className="margin-0 p-2 actName-font" id={activity.activityId}>
+                    <h4 className="margin-0 p-2 actName-font overflow-hidden" id={activity.activityId}>
                       {activity.activityName}
                       <a href={`#activityForm?activityId=${activity.activityId}`}>
                         <i className=" fas fa-pencil-alt"></i>
