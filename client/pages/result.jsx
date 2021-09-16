@@ -41,7 +41,7 @@ export default class Result extends React.Component {
                 </a>
                 <Accordion plan={this.state.currentPlanId} />
              </div>
-        </div>
+           </div>
         </div>
       </>
     );

@@ -1,6 +1,5 @@
 require('dotenv/config');
 const express = require('express');
-// const uploadsMiddleware = require('./uploads-middleware');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
