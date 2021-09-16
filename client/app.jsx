@@ -31,7 +31,7 @@ export default class App extends React.Component {
     }
     if (path === 'activityForm') {
       const activityId = this.state.route.params.get('activityId');
-      return <ActivityForm activityId={activityId} />;
+      return <ActivityForm activityId={activityId} planId={planId} />;
     }
   }
 

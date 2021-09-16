@@ -34,7 +34,6 @@ export default class ActivityForm extends React.Component {
               activityName: activityId.activityName,
               details: activityId.details,
               planId: activityId.planId
-            }, () => {
             });
           }
         });
@@ -72,6 +71,7 @@ export default class ActivityForm extends React.Component {
         .then(response => {
           response.json();
           event.target.reset();
+          window.location.hash = `#result?planId=${this.state.planId}`;
         })
         .catch(err => {
           console.error(err);
@@ -89,6 +89,7 @@ export default class ActivityForm extends React.Component {
         .then(response => {
           response.json();
           event.target.reset();
+          window.location.hash = `#result?planId=${this.state.planId}`;
         })
         .catch(err => {
           console.error(err);
@@ -132,7 +133,7 @@ export default class ActivityForm extends React.Component {
               <div className="col-10 col-sm-9">
                 <div className="mb-3 d-flex justify-content-end">
                   <button className="btn btn-primary">
-                    <a href={`#result?planId=${this.state.planId}`}>Submit</a>
+                    submit
                   </button>
                 </div>
               </div>
