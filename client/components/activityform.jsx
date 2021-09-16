@@ -9,7 +9,8 @@ export default class ActivityForm extends React.Component {
       activityName: '',
       location: '',
       details: '',
-      planId: ''
+      planId: '',
+      activityId: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
@@ -20,9 +21,10 @@ export default class ActivityForm extends React.Component {
   componentDidMount() {
     if (window.location.hash === '') {
       this.setState({ planId: this.props.planId });
-    } else {
-      this.setState({ planId: this.props.planId });
     }
+    fetch(`/api/activities/${this.props.activityId}`)
+      .then(res => res.json())
+      .then(activityId => this.setState({ activityId }));
   }
 
   handleActivityName(event) {
@@ -95,7 +97,9 @@ export default class ActivityForm extends React.Component {
             <div className="row d-flex justify-content-center">
               <div className="col-10 col-sm-9">
                 <div className="mb-3 d-flex justify-content-end">
-                  <button type="submit" className="btn btn-primary">Submit</button>
+                  <a href={`#result?planId=${this.props.planId}`}>
+                    <button className="btn btn-primary">Submit</button>
+                  </a>
                 </div>
               </div>
             </div>

@@ -48,7 +48,7 @@ app.get('/api/activities', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/activities/:planId', (req, res, next) => {
+app.get('/api/plans/:planId/activities', (req, res, next) => {
   const id = req.params.planId;
   const params = [id];
   const getActivities = `
@@ -61,6 +61,23 @@ app.get('/api/activities/:planId', (req, res, next) => {
   db.query(getActivities, params)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/activities/:activityId', (req, res, next) => {
+  const idAct = req.params.activityId;
+  const params = [idAct];
+  const actId = `
+    select "activityName",
+           "details",
+           "activityId"
+      from "activities"
+     where "activityId" = $1
+  `;
+  db.query(actId, params)
+    .then(result => {
+      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });
