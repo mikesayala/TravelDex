@@ -35,6 +35,7 @@ export default class Result extends React.Component {
                 </h2>
                 <h1 className="m-1 plan">
                   {this.state.currentPlan.planName}
+                <i className="relative-5ish fas fa-trash"></i>
                 </h1>
                 <a href={`#activityForm?planId=${this.state.currentPlanId}`} className="d-flex justify-content-end margin-3">
                   <button className="mb-2 btn btn-primary">Add</button>
