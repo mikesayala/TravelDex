@@ -196,7 +196,6 @@ li:hover {
 .moodal {
   position: fixed;
   top: 250px;
-  left: 350px;
   width: 450px;
   height: 225px;
   border: 1px solid black;
