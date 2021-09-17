@@ -33,7 +33,6 @@ class AppDrawer extends React.Component {
   }
 
   render() {
-    const { setPlanId } = this.props;
     return (
      <div>
         <div onClick={this.handleToggleOff} className={`${this.state.isOpen ? 'background-is-active fixed' : 'background fixed'}`}></div>
@@ -48,7 +47,7 @@ class AppDrawer extends React.Component {
                 this.state.plans.map(listItem =>
                   <div key={listItem.planId}>
                     <h4 id={listItem.planId}>
-                      <a onClick={() => { setPlanId(listItem.planId); }} href={`#result?planId=${listItem.planId}`}>
+                      <a href={`#result?planId=${listItem.planId}`}>
                         {listItem.planName}
                       </a>
                     </h4>
