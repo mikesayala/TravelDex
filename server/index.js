@@ -47,6 +47,20 @@ app.get('/api/activities', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/plans/:planId', (req, res, next) => {
+  const sql = `
+    select *
+      from "plans"
+      where "planId" = $1
+  `;
+  const params = [req.params.planId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/plans/:planId/activities', (req, res, next) => {
   const id = req.params.planId;
   const params = [id];
