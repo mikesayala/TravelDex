@@ -1,6 +1,7 @@
 import React from 'react';
 import Accordion from '../components/accordion';
 import AppDrawer from '../components/app-drawer';
+import Modal from '../components/modal';
 
 export default class Result extends React.Component {
   constructor(props) {
@@ -8,8 +9,11 @@ export default class Result extends React.Component {
     this.state = {
       view: 'results',
       currentPlanId: parseInt(this.props.planId),
-      currentPlan: {}
+      currentPlan: {},
+      isOpen: false
     };
+    this.showModal = this.showModal.bind(this);
+    this.handleTrash = this.handleTrash.bind(this);
   }
 
   componentDidMount() {
@@ -20,9 +24,18 @@ export default class Result extends React.Component {
       });
   }
 
+  handleTrash(e) {
+    this.setState({ isOpen: true });
+  }
+
+  showModal(e) {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
     return (
       <>
+        <Modal planId={this.state.currentPlanId} onClose={this.showModal} isOpen={this.state.isOpen} />
         <AppDrawer />
         <div className="container">
            <div className="d-flex row">
@@ -35,7 +48,7 @@ export default class Result extends React.Component {
                 </h2>
                 <h1 className="m-1 plan">
                   {this.state.currentPlan.planName}
-                <i className="relative-5ish fas fa-trash"></i>
+                <i onClick={this.handleTrash} className="relative-5ish fas fa-trash"></i>
                 </h1>
                 <a href={`#activityForm?planId=${this.state.currentPlanId}`} className="d-flex justify-content-end margin-3">
                   <button className="mb-2 btn btn-primary">Add</button>
