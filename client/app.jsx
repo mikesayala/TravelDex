@@ -12,7 +12,6 @@ export default class App extends React.Component {
       plans: []
     };
     this.renderPage = this.renderPage.bind(this);
-    this.setPlanId = this.setPlanId.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +25,6 @@ export default class App extends React.Component {
         this.setState({ plans: planData });
       });
 
-  }
-
-  setPlanId(planId) {
-    this.setState({ route: parseRoute(`#result?planId=${planId}`) });
   }
 
   renderPage() {
@@ -50,7 +45,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <AppDrawer setPlanId={this.setPlanId} />
+        <AppDrawer />
         {this.renderPage()}
       </div>
     );
