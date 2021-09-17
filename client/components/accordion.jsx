@@ -10,6 +10,7 @@ export default class Accordion extends React.Component {
       activities: []
     };
     this.handleClick = this.handleClick.bind(this);
+    this.callPlansApi = this.callPlansApi.bind(this);
   }
 
   handleClick(event) {
@@ -21,12 +22,24 @@ export default class Accordion extends React.Component {
     }
   }
 
+  callPlansApi(plan) {
+    if (plan) {
+      fetch(`api/plans/${plan}/activities`)
+        .then(response => response.json())
+        .then(result => {
+          this.setState({ activities: result });
+        });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.plan !== this.props.plan) {
+      this.callPlansApi(this.props.plan);
+    }
+  }
+
   componentDidMount() {
-    fetch(`api/plans/${this.state.planId}/activities`)
-      .then(response => response.json())
-      .then(result => {
-        this.setState({ activities: result });
-      });
+    this.callPlansApi(this.state.planId);
   }
 
   render() {

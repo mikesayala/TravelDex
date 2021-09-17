@@ -25,7 +25,7 @@ export default class Home extends React.Component {
   render() {
     return (
     <>
-      <AppDrawer plans={this.state.planId} />
+      <AppDrawer setPlanId={this.setPlanId} plans={this.state.planId} />
       <div className="container">
         <Title />
         { this.state.view === 'activity-form' ? <ActivityForm planId={this.state.planId}/> : <PlanForm setPlanId={this.setPlanId} setFormView={this.setFormView}/>}

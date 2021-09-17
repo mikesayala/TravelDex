@@ -47,6 +47,20 @@ app.get('/api/activities', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/plans/:planId', (req, res, next) => {
+  const sql = `
+    select *
+      from "plans"
+      where "planId" = $1
+  `;
+  const params = [req.params.planId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/plans/:planId/activities', (req, res, next) => {
   const id = req.params.planId;
   const params = [id];
@@ -144,6 +158,36 @@ app.patch('/api/activities/:activityId', (req, res, next) => {
         });
       }
       res.json(updatedActivity);
+    })
+    .catch(err => next(err));
+});
+
+app.delete('/api/activities/:planId', (req, res, next) => {
+  const params = [req.params.planId];
+  const sql = `
+          delete from "activities"
+          where "planId" = $1
+          returning *
+  `;
+  db.query(sql, params)
+    .then(result => {
+      const deletedPlan = result.rows[0];
+      res.status(204).json(deletedPlan);
+    })
+    .catch(err => next(err));
+});
+
+app.delete('/api/plans/:planId', (req, res, next) => {
+  const params = [req.params.planId];
+  const sql = `
+          delete from "plans"
+          where "planId" = $1
+          returning *
+  `;
+  db.query(sql, params)
+    .then(result => {
+      const deletedPlan = result.rows[0];
+      res.status(204).json(deletedPlan);
     })
     .catch(err => next(err));
 });

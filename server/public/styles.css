@@ -185,3 +185,59 @@ li:hover {
 .height-3 {
   height: 4rem;
 }
+
+.modal-background {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.moodal {
+  position: fixed;
+  top: 250px;
+  width: 450px;
+  height: 225px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-hidden {
+  display: none;
+}
+
+.delete-no-button {
+  padding: 5px 37px;
+  font-size: 25px;
+  color: white;
+  background-color: #c82333;
+  border: none;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+
+.delete-yes-button {
+  padding: 5px 37px;
+  font-size: 25px;
+  color: white;
+  background-color: #7749f8;
+  border: none;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.modal-row {
+  display: flex;
+}

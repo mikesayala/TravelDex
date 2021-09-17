@@ -1,6 +1,5 @@
 import React from 'react';
 import Title from '../components/title';
-import AppDrawer from '../components/app-drawer';
 export default class ActivityForm extends React.Component {
   constructor(props) {
     super(props);
@@ -92,7 +91,6 @@ export default class ActivityForm extends React.Component {
   render() {
     return (
       <>
-       <AppDrawer />
        <div>
         <Title />
         <div className="mt-5 d-flex justify-content-center flex-column-reverse">
