@@ -148,36 +148,6 @@ app.patch('/api/activities/:activityId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// app.delete('/api/plans/planId', (req, res) => {
-//   const id = req.params.planId;
-//   const params = [req.params.planId];
-//   if (id < 1) {
-//     res.status(400).json({ error: 'planId must be positive integer' });
-//     return;
-//   }
-
-//   const sql = `
-//         delete from "plans"
-//         where "planId" = $1
-//         returning *
-//   `;
-//   db.query(sql, params)
-//     .then(result => {
-//       if (result.rows[0] === undefined) {
-//         res.status(404).json({ error: 'cannot find planId of ' + id });
-//         return;
-//       }
-//       const deletedPlan = result.rows[0];
-//       res.status(204).json(deletedPlan);
-//     })
-//     .catch(err => {
-//       if (err) {
-//         console.error(err);
-//         res.status(500).json({ error: 'An unexpected error occurred' });
-//       }
-//     });
-// });
-
 app.delete('/api/activities/:planId', (req, res, next) => {
   const params = [req.params.planId];
   const sql = `
