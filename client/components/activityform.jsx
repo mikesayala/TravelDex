@@ -9,7 +9,8 @@ export default class ActivityForm extends React.Component {
       location: '',
       details: '',
       planId: '',
-      activityId: null
+      activityId: null,
+      amount: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
