@@ -241,3 +241,7 @@ li:hover {
 .modal-row {
   display: flex;
 }
+
+.pointer-events {
+  pointer-events: none;
+}

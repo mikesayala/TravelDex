@@ -67,6 +67,7 @@ app.get('/api/plans/:planId/activities', (req, res, next) => {
   const getActivities = `
     select "activityName",
            "details",
+           "activityId",
            "amount"
       from "activities"
       where "planId" = $1

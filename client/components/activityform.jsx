@@ -10,9 +10,10 @@ export default class ActivityForm extends React.Component {
       details: '',
       planId: '',
       activityId: null,
-      amount: null
+      amount: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAmount = this.handleAmount.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
     this.handleLocation = this.handleLocation.bind(this);
     this.handleActivityName = this.handleActivityName.bind(this);
@@ -30,7 +31,8 @@ export default class ActivityForm extends React.Component {
             this.setState({
               activityName: activityId.activityName,
               details: activityId.details,
-              planId: activityId.planId
+              planId: activityId.planId,
+              amount: activityId.amount
             });
           }
         });
@@ -49,8 +51,12 @@ export default class ActivityForm extends React.Component {
     this.setState({ details: event.target.value });
   }
 
+  handleAmount(event) {
+    this.setState({ amount: event.target.value });
+  }
+
   handleSubmit(event) {
-    const { activityName, details, planId } = this.state;
+    const { activityName, details, amount, planId } = this.state;
     event.preventDefault();
     if (this.props.planId) {
       fetch('/api/activities/', {
@@ -61,6 +67,7 @@ export default class ActivityForm extends React.Component {
         body: JSON.stringify({
           activityName,
           details,
+          amount,
           planId
         })
       })
@@ -77,7 +84,8 @@ export default class ActivityForm extends React.Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           activityName,
-          details
+          details,
+          amount
         })
       })
         .then(response => {
@@ -96,12 +104,20 @@ export default class ActivityForm extends React.Component {
         <Title />
         <div className="mt-5 d-flex justify-content-center flex-column-reverse">
           <form onSubmit={this.handleSubmit}>
-            <div className="d-flex justify-content-center align-items-end">
+            <div className="d-flex row justify-content-center align-items-end">
               <div className="col-10 col-sm-9">
                 <div className="mb-3">
                   <label htmlFor="activity-name" className="form-label">Activity Name</label>
                   <input onChange={this.handleActivityName} value={ this.state.activityName } required type="text" className="col-12 form-control-lg" id="activity-name" placeholder=""/>
               </div>
+              </div>
+            </div>
+            <div className="row d-flex justify-content-center">
+              <div className="col-10 col-sm-9">
+                <div className="mb-3">
+                  <label htmlFor="amount" className="form-label">$</label>
+                <input onChange={this.handleAmount} type="text" value={ this.state.amount } id="amount" className="col-12 form-control-lg" aria-label="Amount(to the nearest dollar)"/>
+                </div>
               </div>
             </div>
             <div className="row d-flex justify-content-center">

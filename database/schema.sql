@@ -37,7 +37,7 @@ CREATE TABLE "public"."activities" (
 	"details" TEXT NOT NULL,
 	"location" TEXT,
 	-- "pictureUrl" TEXT  NULL,
-	"amount" integer,
+	"amount" integer NOT NULL,
 	CONSTRAINT "activities_pk" PRIMARY KEY ("activityId")
 ) WITH (
   OIDS=FALSE

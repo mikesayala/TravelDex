@@ -8,10 +8,12 @@ export default class Result extends React.Component {
     this.state = {
       view: 'results',
       isOpen: false,
-      plan: null
+      plan: null,
+      amountTotal: 0
     };
     this.showModal = this.showModal.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
+    this.setAmountTotal = this.setAmountTotal.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +21,10 @@ export default class Result extends React.Component {
       .then(planData => {
         this.setState({ plan: planData });
       });
+  }
+
+  setAmountTotal(total) {
+    this.setState({ amountTotal: total });
   }
 
   handleTrash(e) {
@@ -43,9 +49,14 @@ export default class Result extends React.Component {
                <img src={plan.pictureUrl} className=" pictureUrl h-25 p-0 m-0" alt=""/>
              </div>
              <div className="col-12 h-100 col-sm-6">
-                <h2 className="m-1 plan me-3">
-                  {plan.date}
-                </h2>
+                <div className="col-12 modal-row align-items-center justify-content-between">
+                  <h2 className="m-1 plan me-3">
+                    {plan.date}
+                  </h2>
+                  <h1>
+                    ${this.state.amountTotal}
+                  </h1>
+                </div>
                 <h1 className="m-1 plan">
                   {plan.planName}
                 <i onClick={this.handleTrash} className="relative-5ish fas fa-trash"></i>
@@ -53,7 +64,7 @@ export default class Result extends React.Component {
                 <a href={`#activityForm?planId=${plan.planId}`} className="d-flex justify-content-end margin-3">
                   <button className="mb-2 btn btn-primary">Add</button>
                 </a>
-                <Accordion plan={plan.planId} />
+                <Accordion setAmountTotal={this.setAmountTotal} plan={plan.planId} />
              </div>
            </div>
         </div>

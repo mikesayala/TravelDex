@@ -39,7 +39,16 @@ export default class Accordion extends React.Component {
   }
 
   componentDidMount() {
-    this.callPlansApi(this.state.planId);
+    fetch(`api/plans/${this.state.planId}/activities`)
+      .then(response => response.json())
+      .then(result => {
+        let total = 0;
+        result.forEach(activity => {
+          total += activity.amount;
+        });
+        this.props.setAmountTotal(total);
+        this.setState({ activities: result });
+      });
   }
 
   render() {
@@ -51,14 +60,17 @@ export default class Accordion extends React.Component {
         actId = 'height-0';
       }
       return (
-               <div key={activity.activityId}>
-                  <div onClick={this.handleClick} className="col-12 height-3 lightblue pointer rounded-top border-top border-start border-end border-dark">
-                    <h4 className="margin-0 p-2 actName-font overflow-hidden" id={activity.activityId}>
+               <div onClick={this.handleClick} key={activity.activityId}>
+                  <div id={activity.activityId} className="col-12 height-3 modal-row justify-content-between lightblue pointer rounded-top border-top border-start border-end border-dark">
+                    <div className="row col-10 p-2">
+                      <h4 id={activity.activityId} className="modal-row align-items-center col-10 margin-0 pl-2 actName-font">
                       {activity.activityName}
-                      <a href={`#activityForm?activityId=${activity.activityId}`}>
+                      </h4>
+                      <h4 className="inline pt-2 modal-row align-items-center col-2">${activity.amount || 0}</h4>
+                    </div>
+                      <a className="me-2" href={`#activityForm?activityId=${activity.activityId}`}>
                         <i className=" fas fa-pencil-alt"></i>
                       </a>
-                    </h4>
                   </div>
                   <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
                     <p className="m-2 actDeets-font">
