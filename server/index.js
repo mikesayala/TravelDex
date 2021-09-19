@@ -67,7 +67,8 @@ app.get('/api/plans/:planId/activities', (req, res, next) => {
   const getActivities = `
     select "activityName",
            "details",
-           "activityId"
+           "activityId",
+           "amount"
       from "activities"
       where "planId" = $1
       order by "activityId" asc
@@ -86,6 +87,7 @@ app.get('/api/activities/:activityId', (req, res, next) => {
     select "activityName",
            "details",
            "activityId",
+           "amount",
            "planId"
       from "activities"
      where "activityId" = $1
@@ -117,16 +119,16 @@ app.post('/api/plans', (req, res, next) => {
 });
 
 app.post('/api/activities', (req, res, next) => {
-  const { details, activityName, planId } = req.body;
+  const { details, activityName, amount, planId } = req.body;
   if (!activityName || !details) {
     throw new ClientError(400, 'activityName and details are required fields');
   }
   const insertActivity = `
-    insert into "activities" ("activityName", "details", "planId")
-    values ($1, $2, $3)
-    returning "activityName", "details", "activityId"
+    insert into "activities" ("activityName", "details", "amount", "planId")
+    values ($1, $2, $3, $4)
+    returning "activityName", "details", "amount", "activityId"
   `;
-  const params = [activityName, details, planId];
+  const params = [activityName, details, amount, planId];
   db.query(insertActivity, params)
     .then(result => {
       const [activity] = result.rows;
@@ -136,7 +138,7 @@ app.post('/api/activities', (req, res, next) => {
 });
 
 app.patch('/api/activities/:activityId', (req, res, next) => {
-  const { activityName, details } = req.body;
+  const { activityName, details, amount } = req.body;
   const activityId = parseInt(req.params.activityId);
   if (!activityName || !details) {
     throw new ClientError(400, 'activityName, and details are required fields');
@@ -144,11 +146,12 @@ app.patch('/api/activities/:activityId', (req, res, next) => {
   const updateActivity = `
       update "activities"
          set "activityName" = $1,
-             "details" = $2
-       where "activityId" = $3
+             "details" = $2,
+             "amount" = $3
+       where "activityId" = $4
        returning *
   `;
-  const params = [activityName, details, activityId];
+  const params = [activityName, details, amount, activityId];
   db.query(updateActivity, params)
     .then(result => {
       const [updatedActivity] = result.rows;
