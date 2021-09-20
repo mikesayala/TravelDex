@@ -1,5 +1,6 @@
 import React from 'react';
 import Accordion from '../components/accordion';
+import AppDrawer from '../components/app-drawer';
 import Modal from '../components/modal';
 
 export default class Result extends React.Component {
@@ -38,10 +39,13 @@ export default class Result extends React.Component {
   render() {
     const plan = this.state.plan;
     if (plan === null) {
-      return <div>...loading</div>;
+      return <div>
+        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+      </div>;
     }
     return (
        <>
+       <AppDrawer />
         <Modal planId={plan.planId} onClose={this.showModal} isOpen={this.state.isOpen} />
         <div className="container">
            <div className="d-flex row">
@@ -50,10 +54,10 @@ export default class Result extends React.Component {
              </div>
              <div className="col-12 h-100 col-sm-6">
                 <div className="col-12 modal-row align-items-center justify-content-between">
-                  <h2 className="m-1 plan me-3">
+                  <h3 className="m-1 plan me-3">
                     {plan.date}
-                  </h2>
-                  <h1>
+                  </h3>
+                  <h1 className="mt-2 kite-one">
                     ${this.state.amountTotal}
                   </h1>
                 </div>
@@ -62,7 +66,7 @@ export default class Result extends React.Component {
                 <i onClick={this.handleTrash} className="relative-5ish fas fa-trash"></i>
                 </h1>
                 <a href={`#activityForm?planId=${plan.planId}`} className="d-flex justify-content-end margin-3">
-                  <button className="mb-2 btn btn-primary">Add</button>
+                  <button className="mb-2 btn transform btn-primary">Add</button>
                 </a>
                 <Accordion setAmountTotal={this.setAmountTotal} plan={plan.planId} />
              </div>

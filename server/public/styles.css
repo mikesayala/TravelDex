@@ -130,7 +130,7 @@ li:hover {
 }
 
 .pictureUrl {
-  width: 500px;
+  width: 425px;
 }
 
 .margin-0 {
@@ -244,4 +244,21 @@ li:hover {
 
 .pointer-events {
   pointer-events: none;
+}
+
+.inter-500 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.kite-one {
+  font-family: 'kite one', sans-serif;
+}
+
+.positioning {
+  position: relative;
+  top: 300px;
+  bottom: 500px;
+  left: 600px;
+  right: 300px;
 }
