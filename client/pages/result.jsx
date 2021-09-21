@@ -50,20 +50,20 @@ export default class Result extends React.Component {
         <div className="container">
            <div className="d-flex row">
              <div className="col-12 col-sm-6 p-0 d-flex h-25 justify-content-center">
-               <img src={plan.pictureUrl} className=" pictureUrl h-25 p-0 m-0" alt=""/>
+               <img src={plan.pictureUrl} className=" rounded-bottom pictureUrl h-25 p-0 m-0" alt=""/>
              </div>
              <div className="col-12 h-100 col-sm-6">
                 <div className="col-12 modal-row align-items-center justify-content-between">
-                  <h3 className="m-1 plan me-3">
+                  <h4 className="m-1 plan me-3">
                     {plan.date}
-                  </h3>
+                  </h4>
                   <h1 className="mt-2 kite-one">
                     ${this.state.amountTotal}
                   </h1>
                 </div>
                 <h1 className="m-1 plan">
                   {plan.planName}
-                <i onClick={this.handleTrash} className="relative-5ish fas fa-trash"></i>
+                <i onClick={this.handleTrash} className="pointer trash relative-5ish fas fa-trash"></i>
                 </h1>
                 <a href={`#activityForm?planId=${plan.planId}`} className="d-flex justify-content-end margin-3">
                   <button className="mb-2 btn transform btn-primary">Add</button>

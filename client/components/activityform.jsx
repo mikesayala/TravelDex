@@ -102,7 +102,12 @@ export default class ActivityForm extends React.Component {
       <>
        <div>
         <Title />
-        <div className="mt-5 d-flex justify-content-center flex-column-reverse">
+        <div className=" mt-3 inter-500 d-flex justify-content-center">
+          <h1 className="text-align-center">
+            Activity Form
+          </h1>
+        </div>
+        <div className=" d-flex justify-content-center flex-column-reverse">
           <form onSubmit={this.handleSubmit}>
             <div className="d-flex row justify-content-center align-items-end">
               <div className="col-10 col-sm-9">
@@ -118,14 +123,6 @@ export default class ActivityForm extends React.Component {
                   <label htmlFor="amount" className="form-label">$</label>
                 <input onChange={this.handleAmount} type="text" value={ this.state.amount } id="amount" className="col-12 form-control-lg" aria-label="Amount(to the nearest dollar)"/>
                 </div>
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-10 col-sm-9">
-                <div className="mb-3">
-                  <label htmlFor="location" className="form-label">Location</label>
-                  <input onChange={this.handleLocation} type="text" className="col-12 form-control-lg" id="location" placeholder=""/>
-              </div>
               </div>
             </div>
             <div className="row d-flex justify-content-center">
