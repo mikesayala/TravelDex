@@ -54,8 +54,8 @@ export default class App extends React.Component {
     return (
       <>
         {this.state.failed
-          ? <div className="d-flex justify-content-center align-items-center">
-        <h1>Sorry, there was an error connecting to the network! Please check your internet connection.</h1>
+          ? <div>
+        <h1 className="d-flex m-1 justify-content-center text-center kite-one">Sorry, there was an error connecting to the network! Please check your internet connection.</h1>
       </div>
           : <div>
           <AppDrawer />

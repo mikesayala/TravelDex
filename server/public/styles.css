@@ -255,14 +255,11 @@ li:hover {
   font-family: 'kite one', sans-serif;
 }
 
-.positioning {
-  position: relative;
-  top: 300px;
-  bottom: 500px;
-  left: 600px;
-  right: 300px;
-}
-
 .trash:hover {
   color: #c82333;
+}
+
+.spinner-height {
+  height: 100vh;
+  flex-direction: column-reverse;
 }

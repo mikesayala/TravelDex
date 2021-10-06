@@ -43,7 +43,7 @@ export default class Result extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <div className="d-flex justify-content-center align-items-center">
+      return <div className="d-flex justify-content-center spinner-height align-items-center">
         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
       </div>;
     }
@@ -58,6 +58,9 @@ export default class Result extends React.Component {
                <img src={plan.pictureUrl} className=" rounded-bottom pictureUrl h-25 p-0 m-0" alt=""/>
              </div>
              <div className="col-12 h-100 col-sm-6">
+                <div className="d-flex kite-one pt-1 justify-content-center text-center">
+                  <h2>TravelDex</h2>
+                </div>
                 <div className="col-12 modal-row align-items-center justify-content-between">
                   <h4 className="m-1 plan me-3">
                     {plan.date}
