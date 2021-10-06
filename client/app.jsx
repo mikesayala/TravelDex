@@ -9,7 +9,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       route: parseRoute(window.location.hash),
-      plans: []
+      plans: [],
+      failed: false
     };
     this.renderPage = this.renderPage.bind(this);
   }
@@ -25,6 +26,13 @@ export default class App extends React.Component {
         this.setState({ plans: planData });
       });
 
+    window.addEventListener('online', () => {
+      this.setState({ failed: false });
+    });
+
+    window.addEventListener('offline', () => {
+      this.setState({ failed: true });
+    });
   }
 
   renderPage() {
@@ -44,10 +52,17 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <AppDrawer />
-        {this.renderPage()}
+      <>
+        {this.state.failed
+          ? <div className="d-flex justify-content-center align-items-center">
+        <h1>Sorry, there was an error connecting to the network! Please check your internet connection.</h1>
       </div>
+          : <div>
+          <AppDrawer />
+          {this.renderPage()}
+          </div>
+          }
+          </>
     );
   }
 }

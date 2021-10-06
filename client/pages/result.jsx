@@ -11,7 +11,6 @@ export default class Result extends React.Component {
       isOpen: false,
       plan: null,
       amountTotal: 0,
-      failed: false,
       isLoading: true
     };
     this.showModal = this.showModal.bind(this);
@@ -25,17 +24,9 @@ export default class Result extends React.Component {
         this.setState({ plan: planData, isLoading: false });
       })
       .catch(err => {
-        this.setState({ failed: true, isLoading: false });
+        this.setState({ isLoading: false });
         console.error(err);
       });
-
-    window.addEventListener('online', () => {
-      this.setState({ failed: false, isLoading: false });
-    });
-
-    window.addEventListener('offline', () => {
-      this.setState({ failed: true, isLoading: false });
-    });
   }
 
   setAmountTotal(total) {
@@ -51,17 +42,12 @@ export default class Result extends React.Component {
   }
 
   render() {
-    const plan = this.state.plan;
     if (this.state.isLoading) {
       return <div className="d-flex justify-content-center align-items-center">
         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
       </div>;
     }
-    if (this.state.failed) {
-      return <div className="d-flex justify-content-center align-items-center">
-        <h1>sorry</h1>
-      </div>;
-    }
+    const plan = this.state.plan;
     return (
        <>
        <AppDrawer />
