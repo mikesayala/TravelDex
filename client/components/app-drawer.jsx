@@ -6,7 +6,9 @@ class AppDrawer extends React.Component {
     this.state = {
       isOpen: false,
       plans: [],
-      activities: []
+      activities: [],
+      failed: false,
+      isLoading: true
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleToggleOff = this.handleToggleOff.bind(this);
@@ -21,7 +23,12 @@ class AppDrawer extends React.Component {
         plans: plansData,
         activities: activityData
       });
-    });
+
+    })
+      .catch(error => {
+        console.error(error);
+        this.setState({ failed: true, isLoading: false });
+      });
   }
 
   handleClick() {
@@ -33,6 +40,7 @@ class AppDrawer extends React.Component {
   }
 
   render() {
+    const failed = this.state.failed;
     return (
      <div>
         <div onClick={this.handleToggleOff} className={`${this.state.isOpen ? 'background-is-active fixed' : 'background fixed'}`}></div>
@@ -41,7 +49,11 @@ class AppDrawer extends React.Component {
             <h2 className="justify-center">
               <a href="#">Plans</a>
             </h2>
-            <ul className="justify-center">
+            {failed
+              ? <h1 className="inter">
+               Sorry there was an error connecting to the network! Please check your internet connection.
+               </h1>
+              : <ul className="justify-center text-overflow-clip">
               {
                 this.state.plans &&
                 this.state.plans.map(listItem =>
@@ -55,6 +67,7 @@ class AppDrawer extends React.Component {
                 )
               }
             </ul>
+               }
           </div>
        </div>
     );

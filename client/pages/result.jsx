@@ -11,7 +11,8 @@ export default class Result extends React.Component {
       isOpen: false,
       plan: null,
       amountTotal: 0,
-      isLoading: true
+      isLoading: true,
+      failed: false
     };
     this.showModal = this.showModal.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
@@ -22,6 +23,10 @@ export default class Result extends React.Component {
     fetch(`/api/plans/${this.props.planId}`).then(response => response.json())
       .then(planData => {
         this.setState({ plan: planData, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({ isLoading: false, failed: true });
+        console.error(err);
       });
   }
 
@@ -48,6 +53,7 @@ export default class Result extends React.Component {
        <>
        <AppDrawer />
         <Modal planId={plan.planId} onClose={this.showModal} isOpen={this.state.isOpen} />
+        {this.state.failed && <h1>request failed please try again</h1>}
         <div className="container">
            <div className="d-flex row">
              <div className="col-12 col-sm-6 p-0 d-flex h-25 justify-content-center">

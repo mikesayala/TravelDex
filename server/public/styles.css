@@ -96,6 +96,7 @@ li:hover {
 
 .app-drawer {
   background-color: white;
+  max-width: 250px;
   width: 250px;
   height: 100vh;
   position: absolute;
@@ -104,6 +105,10 @@ li:hover {
   transition: width 1s;
   z-index: 3;
   overflow: scroll;
+}
+
+.text-overflow-clip {
+  text-overflow: clip;
 }
 
 .background-is-active {
@@ -117,12 +122,10 @@ li:hover {
 
 .hidden {
   width: 0;
-  overflow: scroll;
 }
 
 .accordionCollapse {
   width: 0;
-  overflow: scroll;
 }
 
 .plan {

@@ -53,15 +53,17 @@ export default class App extends React.Component {
   render() {
     return (
       <>
+          <div>
+          <AppDrawer />
         {this.state.failed
           ? <div>
         <h1 className="d-flex m-1 justify-content-center text-center kite-one">Sorry, there was an error connecting to the network! Please check your internet connection.</h1>
       </div>
-          : <div>
-          <AppDrawer />
+          : <>
           {this.renderPage()}
+            </>
+        }
           </div>
-          }
           </>
     );
   }

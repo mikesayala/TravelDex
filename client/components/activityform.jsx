@@ -10,7 +10,9 @@ export default class ActivityForm extends React.Component {
       details: '',
       planId: '',
       activityId: null,
-      amount: ''
+      amount: '',
+      failed: false,
+      isLoading: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAmount = this.handleAmount.bind(this);
@@ -76,6 +78,7 @@ export default class ActivityForm extends React.Component {
         })
         .catch(err => {
           console.error(err);
+          this.setState({ failed: true, isLoading: false });
         });
     } else {
       const { activityName, details } = this.state;
@@ -93,15 +96,23 @@ export default class ActivityForm extends React.Component {
         })
         .catch(err => {
           console.error(err);
+          this.setState({ failed: true, isLoading: false });
         });
     }
   }
 
   render() {
+    const failed = this.state.failed;
     return (
       <>
-       <div>
-        <Title />
+       <Title />
+      {failed
+        ? <div className="d-flex pt-4 justify-content-center text-center">
+          <h1 className="inter">
+            Sorry there was an error connecting to the network! please check your internet connection.
+          </h1>
+       </div>
+        : <div>
         <div className=" mt-3 inter-500 d-flex justify-content-center">
           <h1 className="text-align-center">
             Activity Form
@@ -145,6 +156,7 @@ export default class ActivityForm extends React.Component {
           </form>
         </div>
        </div>
+  }
       </>
     );
   }
