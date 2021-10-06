@@ -10,7 +10,9 @@ export default class Result extends React.Component {
       view: 'results',
       isOpen: false,
       plan: null,
-      amountTotal: 0
+      amountTotal: 0,
+      failed: false,
+      isLoading: true
     };
     this.showModal = this.showModal.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
@@ -20,8 +22,20 @@ export default class Result extends React.Component {
   componentDidMount() {
     fetch(`/api/plans/${this.props.planId}`).then(response => response.json())
       .then(planData => {
-        this.setState({ plan: planData });
+        this.setState({ plan: planData, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({ failed: true, isLoading: false });
+        console.error(err);
       });
+
+    window.addEventListener('online', () => {
+      this.setState({ failed: false, isLoading: false });
+    });
+
+    window.addEventListener('offline', () => {
+      this.setState({ failed: true, isLoading: false });
+    });
   }
 
   setAmountTotal(total) {
@@ -38,9 +52,14 @@ export default class Result extends React.Component {
 
   render() {
     const plan = this.state.plan;
-    if (plan === null) {
-      return <div>
+    if (this.state.isLoading) {
+      return <div className="d-flex justify-content-center align-items-center">
         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+      </div>;
+    }
+    if (this.state.failed) {
+      return <div className="d-flex justify-content-center align-items-center">
+        <h1>sorry</h1>
       </div>;
     }
     return (
