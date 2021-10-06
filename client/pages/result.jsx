@@ -22,10 +22,6 @@ export default class Result extends React.Component {
     fetch(`/api/plans/${this.props.planId}`).then(response => response.json())
       .then(planData => {
         this.setState({ plan: planData, isLoading: false });
-      })
-      .catch(err => {
-        this.setState({ isLoading: false });
-        console.error(err);
       });
   }
 
