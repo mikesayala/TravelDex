@@ -57,7 +57,7 @@ export default class Result extends React.Component {
         <div className="container">
            <div className="d-flex row">
              <div className="col-12 col-sm-6 p-0 d-flex h-25 justify-content-center">
-               <img src={plan.pictureUrl} className=" rounded-bottom pictureUrl h-25 p-0 m-0" alt=""/>
+               <img src={plan.pictureUrl} className=" rounded-bottom picture-url h-25 p-0 m-0" alt=""/>
              </div>
              <div className="col-12 h-100 col-sm-6">
                 <div className="d-flex kite-one pt-1 justify-content-center text-center">
