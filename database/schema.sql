@@ -36,7 +36,6 @@ CREATE TABLE "public"."activities" (
 	"planId" integer NOT NULL,
 	"details" TEXT NOT NULL,
 	"location" TEXT,
-	-- "pictureUrl" TEXT  NULL,
 	"amount" integer NOT NULL,
 	CONSTRAINT "activities_pk" PRIMARY KEY ("activityId")
 ) WITH (
