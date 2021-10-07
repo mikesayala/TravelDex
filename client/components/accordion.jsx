@@ -89,7 +89,7 @@ export default class Accordion extends React.Component {
                       </a>
                   </div>
                   <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
-                    <p className="m-2 inter-500 actDeets-font">
+                    <p className="m-2 inter-500 activity-details-font">
                       {activity.details}
                     </p>
                   </div>
