@@ -6,7 +6,9 @@ export default class PlanForm extends React.Component {
       planName: '',
       date: '',
       pictureUrl: '',
-      planId: null
+      planId: null,
+      failed: false,
+      isLoading: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDate = this.handleDate.bind(this);
@@ -48,12 +50,19 @@ export default class PlanForm extends React.Component {
       })
       .catch(err => {
         console.error(err);
+        this.setState({ failed: true, isLoading: false });
       });
   }
 
   render() {
+    const failed = this.state.failed;
     return (
-        <>
+      <>
+      {failed
+        ? <div className="d-flex pt-4 justify-content-center text-center">
+          <h1 className="inter">Sorry there was an error connecting to the network! Please check your internet connection.</h1>
+        </div>
+        : <>
           <div className="row align-center d-flex justify-content-center">
             <div className="col-3 d-flex justify-content-center flex-col-rev height-25">
               <img src="images/computer.png" alt="comp"/>
@@ -93,6 +102,8 @@ export default class PlanForm extends React.Component {
             </div>
           </div>
           </form>
+
+       </> }
           </>
     );
   }

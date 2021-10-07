@@ -96,6 +96,7 @@ li:hover {
 
 .app-drawer {
   background-color: white;
+  max-width: 250px;
   width: 250px;
   height: 100vh;
   position: absolute;
@@ -104,6 +105,10 @@ li:hover {
   transition: width 1s;
   z-index: 3;
   overflow: scroll;
+}
+
+.text-overflow-clip {
+  text-overflow: clip;
 }
 
 .background-is-active {
@@ -117,12 +122,10 @@ li:hover {
 
 .hidden {
   width: 0;
-  overflow: scroll;
 }
 
 .accordionCollapse {
   width: 0;
-  overflow: scroll;
 }
 
 .plan {
@@ -130,7 +133,7 @@ li:hover {
 }
 
 .pictureUrl {
-  width: 500px;
+  width: 425px;
 }
 
 .margin-0 {
@@ -244,4 +247,22 @@ li:hover {
 
 .pointer-events {
   pointer-events: none;
+}
+
+.inter-500 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.kite-one {
+  font-family: 'kite one', sans-serif;
+}
+
+.trash:hover {
+  color: #c82333;
+}
+
+.spinner-height {
+  height: 100vh;
+  flex-direction: column-reverse;
 }

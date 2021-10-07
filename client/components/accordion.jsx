@@ -7,7 +7,9 @@ export default class Accordion extends React.Component {
       isOpen: false,
       activityId: null,
       planId: parseInt(this.props.plan),
-      activities: []
+      activities: [],
+      failed: false,
+      isLoading: true
     };
     this.handleClick = this.handleClick.bind(this);
     this.callPlansApi = this.callPlansApi.bind(this);
@@ -48,41 +50,54 @@ export default class Accordion extends React.Component {
         });
         this.props.setAmountTotal(total);
         this.setState({ activities: result });
+      })
+      .catch(error => {
+        console.error(error);
+        this.setState({ failed: true, isLoading: false });
       });
   }
 
   render() {
+    const failed = this.state.failed;
     let actId;
-    const activitiesMap = this.state.activities.map(activity => {
-      if (activity.activityId === this.state.activityId) {
-        actId = 'height-7-rem';
-      } else {
-        actId = 'height-0';
-      }
-      return (
-               <div onClick={this.handleClick} key={activity.activityId}>
+    return (
+      <div>
+          {this.state.activities.map(activity => {
+            if (activity.activityId === this.state.activityId) {
+              actId = 'height-7-rem';
+            } else {
+              actId = 'height-0';
+            }
+            return (
+              <>
+              {failed
+                ? <div className="d-flex text-center">
+                  <h1 className="m-0 inter">
+               Sorry there was an error connecting to the network! Please check your internet connection.
+                  </h1>
+                </div>
+                : <div onClick={this.handleClick} key={activity.activityId}>
                   <div id={activity.activityId} className="col-12 height-3 modal-row justify-content-between lightblue pointer rounded-top border-top border-start border-end border-dark">
                     <div className="row col-10 p-2">
-                      <h4 id={activity.activityId} className="modal-row align-items-center col-10 margin-0 pl-2 actName-font">
+                      <h4 id={activity.activityId} className="modal-row align-items-center inter-500 col-10 margin-0 pl-2 actName-font">
                       {activity.activityName}
                       </h4>
-                      <h4 className="inline pt-2 modal-row align-items-center col-2">${activity.amount || 0}</h4>
+                      <h4 className="inline pt-2 modal-row align-items-center inter-500 col-2">${activity.amount || 0}</h4>
                     </div>
                       <a className="me-2" href={`#activityForm?activityId=${activity.activityId}`}>
-                        <i className=" fas fa-pencil-alt"></i>
+                        <i className="fas fa-pencil-alt"></i>
                       </a>
                   </div>
                   <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
-                    <p className="m-2 actDeets-font">
+                    <p className="m-2 inter-500 actDeets-font">
                       {activity.details}
                     </p>
                   </div>
                </div>
-      );
-    });
-    return (
-      <div>
-          {activitiesMap}
+    }
+    </>
+            );
+          })}
       </div>
     );
   }

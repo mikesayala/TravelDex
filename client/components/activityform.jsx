@@ -10,7 +10,9 @@ export default class ActivityForm extends React.Component {
       details: '',
       planId: '',
       activityId: null,
-      amount: ''
+      amount: '',
+      failed: false,
+      isLoading: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAmount = this.handleAmount.bind(this);
@@ -76,6 +78,7 @@ export default class ActivityForm extends React.Component {
         })
         .catch(err => {
           console.error(err);
+          this.setState({ failed: true, isLoading: false });
         });
     } else {
       const { activityName, details } = this.state;
@@ -93,16 +96,29 @@ export default class ActivityForm extends React.Component {
         })
         .catch(err => {
           console.error(err);
+          this.setState({ failed: true, isLoading: false });
         });
     }
   }
 
   render() {
+    const failed = this.state.failed;
     return (
       <>
-       <div>
-        <Title />
-        <div className="mt-5 d-flex justify-content-center flex-column-reverse">
+       <Title />
+      {failed
+        ? <div className="d-flex pt-4 justify-content-center text-center">
+          <h1 className="inter">
+            Sorry there was an error connecting to the network! please check your internet connection.
+          </h1>
+       </div>
+        : <div>
+        <div className=" mt-3 inter-500 d-flex justify-content-center">
+          <h1 className="text-align-center">
+            Activity Form
+          </h1>
+        </div>
+        <div className=" d-flex justify-content-center flex-column-reverse">
           <form onSubmit={this.handleSubmit}>
             <div className="d-flex row justify-content-center align-items-end">
               <div className="col-10 col-sm-9">
@@ -118,14 +134,6 @@ export default class ActivityForm extends React.Component {
                   <label htmlFor="amount" className="form-label">$</label>
                 <input onChange={this.handleAmount} type="text" value={ this.state.amount } id="amount" className="col-12 form-control-lg" aria-label="Amount(to the nearest dollar)"/>
                 </div>
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-10 col-sm-9">
-                <div className="mb-3">
-                  <label htmlFor="location" className="form-label">Location</label>
-                  <input onChange={this.handleLocation} type="text" className="col-12 form-control-lg" id="location" placeholder=""/>
-              </div>
               </div>
             </div>
             <div className="row d-flex justify-content-center">
@@ -148,6 +156,7 @@ export default class ActivityForm extends React.Component {
           </form>
         </div>
        </div>
+  }
       </>
     );
   }
