@@ -76,8 +76,8 @@ export default class Accordion extends React.Component {
                Sorry there was an error connecting to the network! Please check your internet connection.
                   </h1>
                 </div>
-                : <div onClick={this.handleClick} key={activity.activityId}>
-                  <div id={activity.activityId} className="col-12 height-3 modal-row justify-content-between lightblue pointer rounded-top border-top border-start border-end border-dark">
+                : <div className="margin-right-22" onClick={this.handleClick} key={activity.activityId}>
+                  <div id={activity.activityId} className="ms-4 me-4 col-12 height-3 modal-row justify-content-between lightblue pointer rounded-top border-top border-start border-end border-dark">
                     <div className="row col-10 p-2">
                       <h4 id={activity.activityId} className="modal-row align-items-center inter-500 col-10 margin-0 pl-2 actName-font">
                       {activity.activityName}
@@ -88,7 +88,7 @@ export default class Accordion extends React.Component {
                         <i className="fas fa-pencil-alt"></i>
                       </a>
                   </div>
-                  <div className={`flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
+                  <div className={`ms-4 me-4 flow-auto col-12 rounded-bottom border border-dark ${actId}`}>
                     <p className="m-2 inter-500 activity-details-font">
                       {activity.details}
                     </p>
